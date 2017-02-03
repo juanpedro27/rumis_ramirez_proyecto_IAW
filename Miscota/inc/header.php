@@ -16,7 +16,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
         <style>
             body {
                 padding-top: 50px;
@@ -41,7 +41,6 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -51,19 +50,30 @@
             <li <?php if ($pagina == "contacto") {echo "class='active'";}?>><a href="contacto.php">Contacto</a></li>
           </ul>
           <form class="navbar-form navbar-right" role="form">
-            <button type="submit" class="btn btn-success">
+             
                                                 <?php
                                                 if (!isset($_SESSION["user"])) {
     
-                                                echo "<a href='login.php'>sign in</a>";
-                                                } else {
-    
-                                                    echo "hola ".$_SESSION["user"];
-                                                    }
-                                            ?>
+                                                echo "<a href='login.php'><input type='button' class='btn btn-success' value='INICIAR SESIÓN'/></a>";
                                                 
-              </button>
-              <button type="submit" class="btn btn-success"><a href="sesion_cerrada.php">Log Out</a></button>
+                                                    
+                                                }
+                                                    
+                                                elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
+        
+                                                echo "<a href='catalogo_admin.php'><input type='button' class='btn btn-success' value='BIENVENIDO ADMIN'/></a>";
+                                                    
+        
+                                                }           
+                                                    
+                                                 else {
+    
+                                                    echo "<input type='button' class='btn btn-success' value='BIENVENIDO {$_SESSION['user']}'/>";
+                                                    }
+                                                ?>
+                                                
+              
+              <input type="button" class="btn btn-success" value="DESCONECTAR" onclick="location.href='sesion_cerrada.php'"/>
 
           </form>
         </div><!--/.navbar-collapse -->

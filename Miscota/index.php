@@ -1,6 +1,6 @@
 <?php 
 $tituloPagina = "Inicio Miscota" ;
-$pagina = "inicio";
+$pagina = "index";
 include('inc/header.php'); ?>
 <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">

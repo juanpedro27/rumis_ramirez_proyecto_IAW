@@ -10,6 +10,6 @@ include('inc/header.php'); ?>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
       </div>
     </div>
-<?php include('inc/footer.php'); ?>
+
 
    

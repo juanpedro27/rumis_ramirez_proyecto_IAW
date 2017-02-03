@@ -1,7 +1,7 @@
 
 
 <?php 
-$tituloPagina = "login usuarios" ;
+$tituloPagina = "Login Usuarios" ;
 $pagina = "login";
 include('inc/header.php'); ?>
 <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -50,16 +50,19 @@ include('inc/header.php'); ?>
     ?>
 
     <form action="login.php" method="post">
-
-      <p><input name="user" required></p>
-      <p><input name="password" type="password" required></p>
-      <p><input type="submit" value="Log In"></p>
+        <div class="form-group">
+            <label for="user">Nombre Usuario</label>
+                        <input type="text" class="form-control" name="user" placeholder="Introduce tu Usuario" required>
+        </div>
+      <label for="password">Contraseña</label>
+                        <input type="password" class="form-control" name="password" placeholder="Introduce tu Contraseña" required><br>
+      <p><input type="submit" value="ACCEDE"> <input type="reset" value="LIMPIAR"></p>
 
     </form>
 
 
           
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <p><a class="btn btn-primary btn-lg" href="formu_registro.php" role="button">Pincha aquí si aún no estas registrado</a></p>
       </div>
     </div>
 <?php include('inc/footer.php'); ?>

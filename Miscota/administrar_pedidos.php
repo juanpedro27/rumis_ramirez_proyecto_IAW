@@ -1,9 +1,8 @@
-
-<meta charset="utf-8">
 <?php 
-$tituloPagina = "Catalogo Admin" ;
-$pagina = "catalogo_admin";
- ?>
+$tituloPagina = "Administrar Pedidos" ;
+$pagina = "administrar_pedidos";
+?>
+
 <?php
   //Open the session
   session_start();
@@ -22,7 +21,7 @@ $pagina = "catalogo_admin";
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
         <style>
             body {
                 padding-top: 50px;
@@ -50,7 +49,7 @@ $pagina = "catalogo_admin";
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <form class="navbar-form navbar-right" role="form">
-                <?php
+                   <?php
                                                 if (!isset($_SESSION["user"])) {
     
                                                 echo "<a href='login.php'><input type='button' class='btn btn-success' value='INICIAR SESIÓN'/></a>";
@@ -60,7 +59,7 @@ $pagina = "catalogo_admin";
                                                     
                                                 elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
         
-                                                echo "<a href='catalogo_admin.php'><input type='button' class='btn btn-success' value='BIENVENIDO ADMIN'/></a>";
+                                                echo "<a href='catalogo_admin.php'><input type='button' class='btn btn-success' value='PANEL DE CONTROL'/></a>";
                                                     
         
                                                 }           
@@ -69,8 +68,7 @@ $pagina = "catalogo_admin";
     
                                                     echo "<input type='button' class='btn btn-success' value='BIENVENIDO {$_SESSION['user']}'/>";
                                                     }
-                                                ?>
-                                                
+                                                ?>                             
               
               <input type="button" class="btn btn-success" value="DESCONECTAR" onclick="location.href='sesion_cerrada.php'"/>
 
@@ -80,20 +78,13 @@ $pagina = "catalogo_admin";
     </nav>
 
 
-
-
-
-
-
-
-      <div class="jumbotron">
+<!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
       <div class="container">
-        <h1>Bienvenido como Administrador</h1>
-        <p>Aqui podras hacer modificaciones en la Base de Datos.</p>
-        <center><p><a class="btn btn-primary btn-lg" href="add_productos.php" role="button">Añadir nuevo Producto</a>&nbsp &nbsp<a class="btn btn-primary btn-lg" href="administrar_clientes.php" role="button">Administrar Clientes</a>&nbsp &nbsp<a class="btn btn-primary btn-lg" href="administrar_pedidos.php" role="button">Administrar Pedidos</a></p></center>
-      <div class='row'> 
-         
-        <?php
+        <h1>Administrar Pedidos</h1>
+        <p>Añade, Edita y elimina los pedidos de Miscota.</p>
+
+<?php
             
    $connection = new mysqli("localhost", "admin", "1234", "Miscota");
           //TESTING IF THE CONNECTION WAS RIGHT
@@ -102,33 +93,53 @@ $pagina = "catalogo_admin";
               exit();
           }
 
-            if ($result = $connection->query("select * from categorias join productos on categorias.id=productos.categorias_id;")); {
+            if ($result = $connection->query("select * from pedidos;")); {
                
-                
+                echo "<table class='table table-striped'>";
+                echo "<thead>";
+                echo "<tr>";
+                    echo "<th>ID</th>";
+                    echo "<th>FECHA</th>";
+                    echo "<th>TOTAL</th>";
+                    echo "<th>COMENTARIO</th>";
+                    echo "<th>CLIENTES_ID</th>";
+                    echo "<th>ELIMINAR</th>";
+                    echo "<th>EDITAR</th>";
+                    echo "<th>AÑADIR</th>";
+                echo "</tr>";
+                echo "</thead>";
                
                               
          
                while($obj = $result->fetch_object()) { 
                 
-            echo "<div class='col-md-4'>"; 
-                echo "<h2>".$obj->nombre."</h2>";
-                echo "<p>".$obj->descripcion."</p>";
-                echo "<img src='".$obj->imagen."' WIDTH=300 HEIGHT=300 BORDER=2 >";
-                echo "<p><a class='btn btn-default' href='borrar_productos.php?id=$obj->id' role='button'>Eliminar Producto &raquo;</a>&nbsp<a class='btn btn-default' href='#' role='button'>Editar Producto &raquo;</a></p>";
+            echo "<tr>";
+                        echo "<td>".$obj->id."</td>";
+                        echo "<td>".$obj->fecha."</td>";
+                        echo "<td>".$obj->total."</td>";
+                        echo "<td>".$obj->comentario."</td>";
+                        echo "<td>".$obj->Clientes_id."</td>";
+                   
+                        echo "<td><a href='borrar_pedido.php?id=$obj->id'>
+                            <img src='img/delete.png';/>
+                          </a></td>";
               
-        echo "</div>";                
-                     
+                        echo "<td><a href='editar_pedido.php?id=$obj->id'>
+                            <img src='img/edit.png';/>
+                          </a></td>";
+                   
+                        echo "<td><a href='add_pedido.php?id=$obj->id'>
+                            <img src='img/anadir.png';/>
+                          </a></td>";
+                   
+                    echo "</tr>";
                 }
+                echo "</table>";
                 
             }
     
 ?>
-       
-  
-</div>
-</div>
-</div>
+          
 
-
-
-    
+      </div>
+    </div>

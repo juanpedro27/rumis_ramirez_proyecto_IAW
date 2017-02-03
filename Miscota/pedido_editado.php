@@ -1,9 +1,8 @@
-
 <meta charset="utf-8">
 <?php 
-$tituloPagina = "Catalogo Admin" ;
-$pagina = "catalogo_admin";
- ?>
+$tituloPagina = "Pedido Editado" ;
+$pagina = "pedido_editado";?>
+
 <?php
   //Open the session
   session_start();
@@ -22,7 +21,7 @@ $pagina = "catalogo_admin";
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
         <style>
             body {
                 padding-top: 50px;
@@ -60,7 +59,7 @@ $pagina = "catalogo_admin";
                                                     
                                                 elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
         
-                                                echo "<a href='catalogo_admin.php'><input type='button' class='btn btn-success' value='BIENVENIDO ADMIN'/></a>";
+                                                echo "<a href='administrar_pedidos.php'><input type='button' class='btn btn-success' value='VUELVE A ADMINISTRAR PEDIDOS'/></a>";
                                                     
         
                                                 }           
@@ -79,56 +78,4 @@ $pagina = "catalogo_admin";
       </div>
     </nav>
 
-
-
-
-
-
-
-
-      <div class="jumbotron">
-      <div class="container">
-        <h1>Bienvenido como Administrador</h1>
-        <p>Aqui podras hacer modificaciones en la Base de Datos.</p>
-        <center><p><a class="btn btn-primary btn-lg" href="add_productos.php" role="button">Añadir nuevo Producto</a>&nbsp &nbsp<a class="btn btn-primary btn-lg" href="administrar_clientes.php" role="button">Administrar Clientes</a>&nbsp &nbsp<a class="btn btn-primary btn-lg" href="administrar_pedidos.php" role="button">Administrar Pedidos</a></p></center>
-      <div class='row'> 
-         
-        <?php
-            
-   $connection = new mysqli("localhost", "admin", "1234", "Miscota");
-          //TESTING IF THE CONNECTION WAS RIGHT
-          if ($connection->connect_errno) {
-              printf("Connection failed: %s\n", $connection->connect_error);
-              exit();
-          }
-
-            if ($result = $connection->query("select * from categorias join productos on categorias.id=productos.categorias_id;")); {
-               
-                
-               
-                              
-         
-               while($obj = $result->fetch_object()) { 
-                
-            echo "<div class='col-md-4'>"; 
-                echo "<h2>".$obj->nombre."</h2>";
-                echo "<p>".$obj->descripcion."</p>";
-                echo "<img src='".$obj->imagen."' WIDTH=300 HEIGHT=300 BORDER=2 >";
-                echo "<p><a class='btn btn-default' href='borrar_productos.php?id=$obj->id' role='button'>Eliminar Producto &raquo;</a>&nbsp<a class='btn btn-default' href='#' role='button'>Editar Producto &raquo;</a></p>";
-              
-        echo "</div>";                
-                     
-                }
-                
-            }
-    
-?>
-       
-  
-</div>
-</div>
-</div>
-
-
-
-    
+<center><h3>Pedido editado correctamente</h3></center>

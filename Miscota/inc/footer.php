@@ -2,24 +2,38 @@
      <h1><center>PRODUCTOS DESTACADOS</center></h1>
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-md-4">
-          <h2>Collares</h2>
-          <p>Collar de color rojo.</p>
-            <img src="img/collar1.jpg" WIDTH=300 HEIGHT=200 BORDER=2 >
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Piensos</h2>
-          <p>Pienso Royal Cannin.</p>
-            <img src="img/pienso1.jpg" WIDTH=300 HEIGHT=200 BORDER=2 >
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Antiparásitos</h2>
-          <p>Antiparásitos Scaliboor.</p>
-            <img src="img/anti1.jpg" WIDTH=300 HEIGHT=200 BORDER=2 >
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
+          
+        <?php
+            
+   $connection = new mysqli("localhost", "admin", "1234", "Miscota");
+          //TESTING IF THE CONNECTION WAS RIGHT
+          if ($connection->connect_errno) {
+              printf("Connection failed: %s\n", $connection->connect_error);
+              exit();
+          }
+
+            if ($result = $connection->query("select * from categorias join productos on categorias.id=productos.categorias_id where productos.id=1 or productos.id=5 or productos.id=9 ;")); {
+                     
+         
+               while($obj = $result->fetch_object()) { 
+                
+            echo "<div class='col-md-4'>"; 
+                echo "<h2>".$obj->nombre."</h2>";
+                echo "<p>".$obj->descripcion."</p>";
+                echo "<img src='".$obj->imagen."' WIDTH=300 HEIGHT=300 BORDER=2 >";
+                echo "<a class='btn btn-default' href='detalles.php?id=$obj->id' role='button'>Ver detalles &raquo;</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp";
+                echo "<a class='btn btn-default' href='carrito.php?id=$obj->id' role='button'>Añadir al carrito &raquo;</a>";
+                   
+        echo "</div>";                
+                     
+                }
+                
+            }
+    
+?>
+          
+          
+        
       </div>
 
       <hr>
