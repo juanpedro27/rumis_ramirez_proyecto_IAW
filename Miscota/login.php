@@ -8,11 +8,12 @@ include('inc/header.php'); ?>
     <div class="jumbotron">
       <div class="container">
         <h1>Inicio de sesión</h1>
-        <p>Para continuar es necesario que inicies sesión.</p>
+        <hr>
+        <p>Para continuar es necesario que inicies sesión.<img src="img/dcollar.jpg" width="80" height="80" align="right"></p>
+        <img src="img/perro1.png" align="right">
         
-   
+<?php
 
-    <?php
         //FORM SUBMITTED
         if (isset($_POST["user"])) {
           //CREATING THE CONNECTION
@@ -33,7 +34,8 @@ include('inc/header.php'); ?>
               //No rows returned
               if ($result->num_rows===0) {
                 echo "LOGIN INVALIDO";
-              } else {
+                
+            } else {
                 $obj=$result->fetch_object();
                 //VALID LOGIN. SETTING SESSION VARS
                 $_SESSION["user"]=$_POST["user"];
@@ -44,11 +46,13 @@ include('inc/header.php'); ?>
           } else {
             echo "Wrong Query";
           }
-      }
+              
+    }
+          
+        
+?>
           
           
-    ?>
-
     <form action="login.php" method="post">
         <div class="form-group">
             <label for="user">Nombre Usuario</label>
@@ -63,6 +67,7 @@ include('inc/header.php'); ?>
 
           
         <p><a class="btn btn-primary btn-lg" href="formu_registro.php" role="button">Pincha aquí si aún no estas registrado</a></p>
+        <img src="img/cuenco.jpg" width="80" height="80" align="right">
       </div>
     </div>
 <?php include('inc/footer.php'); ?>

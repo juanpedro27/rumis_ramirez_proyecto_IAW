@@ -1,6 +1,6 @@
 <?php 
-$tituloPagina = "Editar Pedidos" ;
-$pagina = "editar_pedido";
+$tituloPagina = "Editar Productos" ;
+$pagina = "editar_producto";
 ?>
 
 <?php
@@ -59,7 +59,7 @@ $pagina = "editar_pedido";
                                                     
                                                 elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
         
-                                                echo "<a href='administrar_pedidos.php'><input type='button' class='btn btn-success' value='VOLVER A ADMINISTRAR LOS PEDIDOS'/></a>";
+                                                echo "<a href='catalogo_admin.php'><input type='button' class='btn btn-success' value='PANEL DE CONTROL'/></a>";
                                                     
         
                                                 }           
@@ -81,8 +81,8 @@ $pagina = "editar_pedido";
 <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Administrar Pedidos</h1>
-        <p>Edita los pedidos de Miscota.</p>
+        <h1>Administrar Producto</h1>
+        <p>Edita los productos de Miscota.</p>
 
 <?php
     
@@ -96,9 +96,9 @@ $pagina = "editar_pedido";
           }
 
           
-            if ($result = $connection->query("select * from pedidos where id= ".$_GET['id'])); { 
+            if ($result = $connection->query("select * from productos where id= ".$_GET['id'])); { 
                 
-            $pedid=$_GET['id'];
+            $produ=$_GET['id'];
 
              $obj = $result->fetch_object();
             
@@ -110,20 +110,24 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
                         echo "<input type='number' class='form-control' name='id' value='$obj->id' required>";
             echo "</div>";
             echo "<div class='form-group'>";
-                        echo "<label for='fecha'>Fecha</label>";
-                        echo "<input type='date' class='form-control' name='fecha' value='$obj->fecha' required>";
+                        echo "<label for='nombre'>Nombre</label>";
+                        echo "<input type='text' class='form-control' name='nombre' value='$obj->nombre' required>";
             echo "</div>";
             echo "<div class='form-group'>";
-                        echo "<label for='total'>Total</label>";
-                        echo "<input type='number' class='form-control' name='total' value='$obj->total' required>";
+                        echo "<label for='descripcion'>Descripcion</label>";
+                        echo "<textarea rows='5' class='form-control' name='descripcion' placeholder='$obj->descripcion' required></textarea>";
             echo "</div>";
             echo "<div class='form-group'>";
-                        echo "<label for='comentario'>Comentario</label>";
-                        echo "<textarea rows='5' class='form-control' name='comentario' placeholder='$obj->comentario' required></textarea>";
+                        echo "<label for='precio'>Precio</label>";
+                        echo "<input type='number' class='form-control' name='precio' value='$obj->precio' required>";
             echo "</div>";
             echo "<div class='form-group'>";
-                        echo "<label for='Clientes_id'>ID del Cliente</label>";
-                        echo "<input type='number' class='form-control' name='Clientes_id' value='$obj->Clientes_id' required>";
+                        echo "<label for='imagen'>imagen</label>";
+                        echo "<input type='text' class='form-control' name='imagen' value='$obj->imagen' required>";
+            echo "</div>";
+            echo "<div class='form-group'>";
+                        echo "<label for='Categorias_id'>Categorias_id</label>";
+                        echo "<input type='number' class='form-control' name='Categorias_id' value='$obj->Categorias_id' required>";
             echo "</div>";
                 
               echo "<input type='submit' value='Actualizar'>";
@@ -138,25 +142,27 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
 
         //variables
         $id=$_POST['id'];
-        $fecha=$_POST['fecha'];
-        $total=$_POST['total'];
-        $comentario=$_POST['comentario'];
-        $clid=$_POST['Clientes_id'];
+        $nombre=$_POST['nombre'];
+        $descripcion=$_POST['descripcion'];
+        $precio=$_POST['precio'];
+        $imagen=$_POST['imagen'];
+        $cat=$_POST['Categorias_id'];
 
         //consulta
-        $consulta="UPDATE pedidos SET
+        $consulta="UPDATE productos SET
         `id` =  '$id',
-        `fecha` =  '$fecha',
-        `total` =  '$total',
-        `comentario` =  '$comentario',
-        `Clientes_id` =  '$clid'
-        WHERE  `id` =$pedid;";
+        `nombre` =  '$nombre',
+        `descripcion` =  '$descripcion',
+        `precio` =  '$precio',
+        `imagen` =  '$imagen',
+        `Categorias_id` =  '$cat'
+        WHERE  `id` =$produ;";
 
         
         if ($result = $connection->query($consulta))
 
            {
-          header ("Location: pedido_editado.php");
+          header ("Location: producto_editado.php");
         } else {
 
               echo "Error: " . $result . "<br>" . mysqli_error($connection);

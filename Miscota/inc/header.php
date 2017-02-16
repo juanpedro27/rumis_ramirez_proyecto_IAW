@@ -61,7 +61,7 @@
                                                     
                                                 elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
         
-                                                echo "<a href='catalogo_admin.php'><input type='button' class='btn btn-success' value='BIENVENIDO ADMIN'/></a>";
+                                                echo "<input type='button' class='btn btn-success' value='BIENVENIDO ADMIN'/>";
                                                     
         
                                                 }           
@@ -74,6 +74,8 @@
                                                 
               
               <input type="button" class="btn btn-success" value="DESCONECTAR" onclick="location.href='sesion_cerrada.php'"/>
+              
+              <img src="img/carrito.png" width="50" height="35"/>
 
           </form>
         </div><!--/.navbar-collapse -->

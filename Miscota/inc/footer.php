@@ -1,6 +1,6 @@
  <div class="container">
-     <h1><center>PRODUCTOS DESTACADOS</center></h1>
-      <!-- Example row of columns -->
+     <h1><center><b>PRODUCTOS DESTACADOS</b></center></h1>
+      <hr>
       <div class="row">
           
         <?php

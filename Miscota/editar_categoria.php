@@ -1,6 +1,6 @@
 <?php 
-$tituloPagina = "Editar Pedidos" ;
-$pagina = "editar_pedido";
+$tituloPagina = "Editar Categoria" ;
+$pagina = "editar_categoria";
 ?>
 
 <?php
@@ -59,7 +59,7 @@ $pagina = "editar_pedido";
                                                     
                                                 elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
         
-                                                echo "<a href='administrar_pedidos.php'><input type='button' class='btn btn-success' value='VOLVER A ADMINISTRAR LOS PEDIDOS'/></a>";
+                                                echo "<a href='administrar_categorias.php'><input type='button' class='btn btn-success' value='VOLVER A ADMINISTRAR LAS CATEGORIAS'/></a>";
                                                     
         
                                                 }           
@@ -81,8 +81,8 @@ $pagina = "editar_pedido";
 <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Administrar Pedidos</h1>
-        <p>Edita los pedidos de Miscota.</p>
+        <h1>Administrar Categorías</h1>
+        <p>Edita las Categorías de los productos de Miscota.</p>
 
 <?php
     
@@ -96,34 +96,26 @@ $pagina = "editar_pedido";
           }
 
           
-            if ($result = $connection->query("select * from pedidos where id= ".$_GET['id'])); { 
+            if ($result = $connection->query("select * from categorias where id= ".$_GET['id'])); { 
                 
-            $pedid=$_GET['id'];
+            $catid=$_GET['id'];
 
              $obj = $result->fetch_object();
             
 echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
           
-            echo "<legend>Rellene para editar este pedido:</legend>";
+            echo "<legend>Rellene para editar esta Categoría:</legend>";
             echo "<div class='form-group'>";
                         echo "<label for='id'>ID</label>";
                         echo "<input type='number' class='form-control' name='id' value='$obj->id' required>";
             echo "</div>";
             echo "<div class='form-group'>";
-                        echo "<label for='fecha'>Fecha</label>";
-                        echo "<input type='date' class='form-control' name='fecha' value='$obj->fecha' required>";
+                        echo "<label for='nombre_cat'>Nombre de la Categoría</label>";
+                        echo "<input type='text' class='form-control' name='nombre_cat' value='$obj->nombre_cat' required>";
             echo "</div>";
             echo "<div class='form-group'>";
-                        echo "<label for='total'>Total</label>";
-                        echo "<input type='number' class='form-control' name='total' value='$obj->total' required>";
-            echo "</div>";
-            echo "<div class='form-group'>";
-                        echo "<label for='comentario'>Comentario</label>";
-                        echo "<textarea rows='5' class='form-control' name='comentario' placeholder='$obj->comentario' required></textarea>";
-            echo "</div>";
-            echo "<div class='form-group'>";
-                        echo "<label for='Clientes_id'>ID del Cliente</label>";
-                        echo "<input type='number' class='form-control' name='Clientes_id' value='$obj->Clientes_id' required>";
+                        echo "<label for='descripcion'>Descripción</label>";
+                        echo "<textarea rows='5' class='form-control' name='descripcion' placeholder='$obj->descripcion' required></textarea>";
             echo "</div>";
                 
               echo "<input type='submit' value='Actualizar'>";
@@ -138,25 +130,21 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
 
         //variables
         $id=$_POST['id'];
-        $fecha=$_POST['fecha'];
-        $total=$_POST['total'];
-        $comentario=$_POST['comentario'];
-        $clid=$_POST['Clientes_id'];
+        $nombre_cat=$_POST['nombre_cat'];
+        $descripcion=$_POST['descripcion'];
 
         //consulta
-        $consulta="UPDATE pedidos SET
+        $consulta="UPDATE categorias SET
         `id` =  '$id',
-        `fecha` =  '$fecha',
-        `total` =  '$total',
-        `comentario` =  '$comentario',
-        `Clientes_id` =  '$clid'
-        WHERE  `id` =$pedid;";
+        `nombre_cat` =  '$nombre_cat',
+        `descripcion` =  '$descripcion'
+        WHERE  `id` =$catid;";
 
         
         if ($result = $connection->query($consulta))
 
            {
-          header ("Location: pedido_editado.php");
+          header ("Location: categoria_editado.php");
         } else {
 
               echo "Error: " . $result . "<br>" . mysqli_error($connection);
@@ -173,4 +161,4 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
           
           
     </div>
-       </div>   
+       </div> 

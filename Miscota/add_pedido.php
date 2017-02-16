@@ -1,7 +1,7 @@
 <?php 
-$tituloPagina = "Editar Pedidos" ;
-$pagina = "editar_pedido";
-?>
+$tituloPagina = "Añadir Pedido" ;
+$pagina = "add_pedido";
+ ?>
 
 <?php
   //Open the session
@@ -59,7 +59,7 @@ $pagina = "editar_pedido";
                                                     
                                                 elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
         
-                                                echo "<a href='administrar_pedidos.php'><input type='button' class='btn btn-success' value='VOLVER A ADMINISTRAR LOS PEDIDOS'/></a>";
+                                                echo "<a href='administrar_pedidos.php'><input type='button' class='btn btn-success' value='VOLVER A ADMINISTRAR PEDIDOS'/></a>";
                                                     
         
                                                 }           
@@ -82,95 +82,71 @@ $pagina = "editar_pedido";
     <div class="jumbotron">
       <div class="container">
         <h1>Administrar Pedidos</h1>
-        <p>Edita los pedidos de Miscota.</p>
-
-<?php
-    
-   
-            
-   $connection = new mysqli("localhost", "admin", "1234", "Miscota");
-          //TESTING IF THE CONNECTION WAS RIGHT
-          if ($connection->connect_errno) {
-              printf("Connection failed: %s\n", $connection->connect_error);
-              exit();
-          }
-
+        <p>Rellene el siguiente formulario para añadir un pedido nuevo.</p>
           
-            if ($result = $connection->query("select * from pedidos where id= ".$_GET['id'])); { 
-                
-            $pedid=$_GET['id'];
-
-             $obj = $result->fetch_object();
-            
-echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
           
-            echo "<legend>Rellene para editar este pedido:</legend>";
-            echo "<div class='form-group'>";
-                        echo "<label for='id'>ID</label>";
-                        echo "<input type='number' class='form-control' name='id' value='$obj->id' required>";
-            echo "</div>";
-            echo "<div class='form-group'>";
-                        echo "<label for='fecha'>Fecha</label>";
-                        echo "<input type='date' class='form-control' name='fecha' value='$obj->fecha' required>";
-            echo "</div>";
-            echo "<div class='form-group'>";
-                        echo "<label for='total'>Total</label>";
-                        echo "<input type='number' class='form-control' name='total' value='$obj->total' required>";
-            echo "</div>";
-            echo "<div class='form-group'>";
-                        echo "<label for='comentario'>Comentario</label>";
-                        echo "<textarea rows='5' class='form-control' name='comentario' placeholder='$obj->comentario' required></textarea>";
-            echo "</div>";
-            echo "<div class='form-group'>";
-                        echo "<label for='Clientes_id'>ID del Cliente</label>";
-                        echo "<input type='number' class='form-control' name='Clientes_id' value='$obj->Clientes_id' required>";
-            echo "</div>";
-                
-              echo "<input type='submit' value='Actualizar'>";
-              echo "<input type='reset' value='Limpiar'>";
+          <?php  
+
+    if (!isset($_POST["id"])) : ?>
+        <center><form role="form" method="post" enctype="multipart/form-data">
+          
+            <legend>Rellene el siguiente formulario:</legend>
+            <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="number" class="form-control" name="id" placeholder="Introduce ID" required>
+            </div>
+            <div class="form-group">
+                        <label for="fecha">Fecha</label>
+                        <input type="date" class="form-control" name="fecha" placeholder="Introduce fecha" required>
+            </div>
+            <div class="form-group">
+                        <label for="total">Total</label>
+                        <input type="number" class="form-control" name="total" placeholder="Introduce el total" required>
+            </div>
+            <div class="form-group">
+                        <label for="comentario">Comentario</label>
+                        <textarea rows="5" class="form-control" name="comentario" placeholder="Añade un comentario" required></textarea>
+            </div> 
+            <div class="form-group">
+                        <label for="Clientes_id">Id de Cliente</label>
+                        <input type="number" class="form-control" name="Clientes_id" placeholder="Introduce ID de cliente" required>
+            </div>
+            
+              <span><input type="submit" value="AÑADIR"></span><br><br>
+              <span><input type="reset" value="LIMPIAR"></span>
 	  
-        echo "</form></center>";  
-                            
-                
-            }  
+        </form></center>
+        
           
-          if (isset($_POST['id'])) {
+          	
+      <?php else: ?>
+          
+         
 
-        //variables
+      <?php
+            echo "<h3>Añadido correctamente</h3>";
+            
+            //CREATING THE CONNECTION
+      	    $connection = new mysqli("localhost", "admin", "1234", "Miscota");
+           //TESTING IF THE CONNECTION WAS RIGHT
+           if ($connection->connect_errno) {
+           	printf("Connection failed: %s\n", $connection->connect_error);
+	        exit();
+	   }
+          
         $id=$_POST['id'];
-        $fecha=$_POST['fecha'];
-        $total=$_POST['total'];
-        $comentario=$_POST['comentario'];
-        $clid=$_POST['Clientes_id'];
-
-        //consulta
-        $consulta="UPDATE pedidos SET
-        `id` =  '$id',
-        `fecha` =  '$fecha',
-        `total` =  '$total',
-        `comentario` =  '$comentario',
-        `Clientes_id` =  '$clid'
-        WHERE  `id` =$pedid;";
-
-        
-        if ($result = $connection->query($consulta))
-
-           {
-          header ("Location: pedido_editado.php");
-        } else {
-
-              echo "Error: " . $result . "<br>" . mysqli_error($connection);
-        }
-      }
-      
-      
+  	   $consulta= "INSERT INTO pedidos VALUES('$id','".$_POST['fecha']."','".$_POST['total']."','".$_POST['comentario']."','".$_POST['Clientes_id']."')";
           
+  	   $result = $connection->query($consulta);
+  	   if (!$result) {
+   		    echo "Query Error";
+       } else {
+  		     echo "Tu pedido ha sido añadido correctamente";
+  	   }
+        
         ?>
-        
-        
           
+       <?php endif ?>   
         
-          
-          
+      </div>
     </div>
-       </div>   

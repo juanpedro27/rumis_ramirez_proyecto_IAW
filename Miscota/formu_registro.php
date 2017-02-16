@@ -12,9 +12,11 @@ include('inc/header.php'); ?>
           <?php  
 
     if (!isset($_POST["nombre"])) : ?>
-        <center><form role="form" method="post" enctype="multipart/form-data">
-          
-            <legend>Rellene el siguiente formulario:</legend>
+        <form role="form" method="post" enctype="multipart/form-data">
+          <legend>Rellene el siguiente formulario:</legend>
+            
+            <img src="img/perros.png" align="right">
+            
             <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control" name="nombre" placeholder="Introduce nombre" required>
@@ -29,7 +31,7 @@ include('inc/header.php'); ?>
             </div>
             <div class="form-group">
                         <label for="nombre">Correo</label>
-                        <input type="mail" class="form-control" name="correo" placeholder="Introduce tu correo" required>
+                        <input type="email" class="form-control" name="correo" placeholder="Introduce tu correo" required>
             </div> 
             <div class="form-group">
                         <label for="nombre">Nombre de usuario</label>
@@ -43,7 +45,7 @@ include('inc/header.php'); ?>
               <span><input type="submit" value="Registrarse"></span><br><br>
               <span><input type="reset" value="Limpiar"></span>
 	  
-        </form></center>
+        </form>
         
           
           	

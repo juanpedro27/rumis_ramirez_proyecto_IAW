@@ -53,7 +53,7 @@ $pagina = "catalogo_admin";
                 <?php
                                                 if (!isset($_SESSION["user"])) {
     
-                                                echo "<a href='login.php'><input type='button' class='btn btn-success' value='INICIAR SESIÓN'/></a>";
+                                                header("Location: login.php");
                                                 
                                                     
                                                 }
@@ -67,7 +67,7 @@ $pagina = "catalogo_admin";
                                                     
                                                  else {
     
-                                                    echo "<input type='button' class='btn btn-success' value='BIENVENIDO {$_SESSION['user']}'/>";
+                                                    header("Location: index.php");
                                                     }
                                                 ?>
                                                 
@@ -89,8 +89,9 @@ $pagina = "catalogo_admin";
       <div class="jumbotron">
       <div class="container">
         <h1>Bienvenido como Administrador</h1>
-        <p>Aqui podras hacer modificaciones en la Base de Datos.</p>
-        <center><p><a class="btn btn-primary btn-lg" href="add_productos.php" role="button">Añadir nuevo Producto</a>&nbsp &nbsp<a class="btn btn-primary btn-lg" href="administrar_clientes.php" role="button">Administrar Clientes</a>&nbsp &nbsp<a class="btn btn-primary btn-lg" href="administrar_pedidos.php" role="button">Administrar Pedidos</a></p></center>
+        <hr>
+        <p>Aquí podras hacer modificaciones en la Aplicación.</p>
+        <center><p><a class="btn btn-primary btn-lg" href="add_productos.php" role="button">Añadir nuevo Producto</a>&nbsp<a class="btn btn-primary btn-lg" href="administrar_clientes.php" role="button">Administrar Clientes</a>&nbsp<a class="btn btn-primary btn-lg" href="administrar_pedidos.php" role="button">Administrar Pedidos</a>&nbsp<a class="btn btn-primary btn-lg" href="administrar_detallepedidos.php" role="button">Administrar Detalles de Pedidos</a>&nbsp<a class="btn btn-primary btn-lg" href="administrar_categorias.php" role="button">Administrar Categorías</a></p></center>
       <div class='row'> 
          
         <?php
@@ -112,9 +113,10 @@ $pagina = "catalogo_admin";
                 
             echo "<div class='col-md-4'>"; 
                 echo "<h2>".$obj->nombre."</h2>";
+                echo "<hr>";
                 echo "<p>".$obj->descripcion."</p>";
                 echo "<img src='".$obj->imagen."' WIDTH=300 HEIGHT=300 BORDER=2 >";
-                echo "<p><a class='btn btn-default' href='borrar_productos.php?id=$obj->id' role='button'>Eliminar Producto &raquo;</a>&nbsp<a class='btn btn-default' href='#' role='button'>Editar Producto &raquo;</a></p>";
+                echo "<p><a class='btn btn-default' href='borrar_productos.php?id=$obj->id' role='button'>Eliminar Producto &raquo;</a>&nbsp<a class='btn btn-default' href='editar_producto.php?id=$obj->id' role='button'>Editar Producto &raquo;</a></p>";
               
         echo "</div>";                
                      

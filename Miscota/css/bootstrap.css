@@ -904,7 +904,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
+  background-color: #ABCBC6;
 }
 input,
 button,
@@ -965,8 +965,8 @@ img {
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
-  border: 0;
-  border-top: 1px solid #eee;
+  border: 2;
+  border-top: 1px solid #BDB7B7;
 }
 .sr-only {
   position: absolute;
@@ -2894,8 +2894,8 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn-success {
   color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #4AA192;
+  border-color: #4AA192;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -4623,7 +4623,7 @@ a.badge:focus {
   padding: 30px 15px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: #eee;
+  background-color: #BFEEE6;
 }
 .jumbotron h1,
 .jumbotron .h1 {

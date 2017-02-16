@@ -97,7 +97,9 @@ $pagina = "editar_clientes";
 
           
             if ($result = $connection->query("select * from clientes where id= ".$_GET['id'])); { 
-
+                
+              $id_cliente=$_GET['id'];  
+                
              $obj = $result->fetch_object();
             
 echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
@@ -105,7 +107,7 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
             echo "<legend>Rellene para editar este usuario:</legend>";
             echo "<div class='form-group'>";
                         echo "<label for='id'>ID</label>";
-                        echo "<input type='text' class='form-control' name='id' value='$obj->id' required>";
+                        echo "<input type='number' class='form-control' name='id' value='$obj->id' required>";
             echo "</div>";
             echo "<div class='form-group'>";
                         echo "<label for='nombre'>Nombre</label>";
@@ -121,7 +123,7 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
             echo "</div>";
             echo "<div class='form-group'>";
                         echo "<label for='correo'>Correo</label>";
-                        echo "<input type='text' class='form-control' name='correo' value='$obj->correo' required>";
+                        echo "<input type='email' class='form-control' name='correo' value='$obj->correo' required>";
             echo "</div>";
             echo "<div class='form-group'>";
                         echo "<label for='usuario'>Usuario</label>";
@@ -133,7 +135,7 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
             echo "</div>";
             echo "<div class='form-group'>";
                         echo "<label for='tipo'>Tipo</label>";
-                        echo "<input type='text' class='form-control' name='tipo' value='$obj->tipo' required>";
+                        echo "<input type='number' class='form-control' name='tipo' value='$obj->tipo' required>";
             echo "</div>";
                 
               echo "<input type='submit' value='Actualizar'>";
@@ -144,7 +146,7 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
                 
             }  
           
-          if (isset($_POST['nombre'])) {
+          if (isset($_POST['id'])) {
 
         //variables
         $id=$_POST['id'];
@@ -166,7 +168,7 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
         `usuario` =  '$usuario',
         `password` = md5('$password'),
         `tipo` = '$tipo'
-        WHERE  `id` =$id;";
+        WHERE  `id` =$id_cliente;";
 
         
         if ($result = $connection->query($consulta))
