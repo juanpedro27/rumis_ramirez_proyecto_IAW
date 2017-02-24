@@ -52,7 +52,7 @@ $pagina = "editar_producto";
                    <?php
                                                 if (!isset($_SESSION["user"])) {
     
-                                                echo "<a href='login.php'><input type='button' class='btn btn-success' value='INICIAR SESIÓN'/></a>";
+                                                header("Location: index.php");
                                                 
                                                     
                                                 }
@@ -66,7 +66,7 @@ $pagina = "editar_producto";
                                                     
                                                  else {
     
-                                                    echo "<input type='button' class='btn btn-success' value='BIENVENIDO {$_SESSION['user']}'/>";
+                                                    header("Location: index.php");
                                                     }
                                                 ?>                             
               
@@ -122,9 +122,10 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
                         echo "<input type='number' class='form-control' name='precio' value='$obj->precio' required>";
             echo "</div>";
             echo "<div class='form-group'>";
-                        echo "<label for='imagen'>imagen</label>";
-                        echo "<input type='text' class='form-control' name='imagen' value='$obj->imagen' required>";
-            echo "</div>";
+                        echo "<label for='imagen'>Adjuntar una imagen</label>";
+                        echo "<input type='file' name='imagen' value='$obj->imagen' required>";
+                        echo "<p class='help-block'>Selecciona una imagen de producto.</p>";
+            echo "</div>";    
             echo "<div class='form-group'>";
                         echo "<label for='Categorias_id'>Categorias_id</label>";
                         echo "<input type='number' class='form-control' name='Categorias_id' value='$obj->Categorias_id' required>";
@@ -136,7 +137,47 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
         echo "</form></center>";  
                             
                 
-            }  
+            }
+          
+          
+        //Temp file. Where the uploaded file is stored temporary
+        $tmp_file = $_FILES['imagen']['tmp_name'];
+
+        //Dir where we are going to store the file
+        $target_dir = "img/";
+
+        //Full name of the file.
+        $target_file = strtolower($target_dir . basename($_FILES['imagen']['name']));
+
+        //Can we upload the file
+        $valid = true;
+
+        //Check if the file already exists
+        if (file_exists($target_file)) {
+            echo "Sorry, file already exists.";
+            $valid = false;
+        }
+
+        //Check the size of the file. Up to 2Mb
+        if($_FILES['imagen']['size'] > (2048000)) {
+            $valid = false;
+	        echo 'Oops!  Your file\'s size is to large.';
+        }
+
+        //Check the file extension: We need an image not any other different type of file
+        $file_extension = pathinfo($target_file, PATHINFO_EXTENSION); // We get the entension
+        if ($file_extension != "jpg" &&
+            $file_extension != "jpeg" &&
+            $file_extension != "png" &&
+            $file_extension != "gif") {
+            $valid = false;
+            echo "Only JPG, JPEG, PNG & GIF files are allowed";
+        }
+
+        if ($valid) {
+            //Put the file in its place
+            move_uploaded_file($tmp_file, $target_file);
+   
           
           if (isset($_POST['id'])) {
 
@@ -145,7 +186,6 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
         $nombre=$_POST['nombre'];
         $descripcion=$_POST['descripcion'];
         $precio=$_POST['precio'];
-        $imagen=$_POST['imagen'];
         $cat=$_POST['Categorias_id'];
 
         //consulta
@@ -154,7 +194,7 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
         `nombre` =  '$nombre',
         `descripcion` =  '$descripcion',
         `precio` =  '$precio',
-        `imagen` =  '$imagen',
+        `imagen` = '$target_file',
         `Categorias_id` =  '$cat'
         WHERE  `id` =$produ;";
 
@@ -169,7 +209,7 @@ echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
         }
       }
       
-      
+        }
           
         ?>
         

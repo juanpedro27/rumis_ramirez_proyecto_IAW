@@ -52,7 +52,7 @@ $pagina = "add_categoria";
                    <?php
                                                 if (!isset($_SESSION["user"])) {
     
-                                                echo "<a href='login.php'><input type='button' class='btn btn-success' value='INICIAR SESIÓN'/></a>";
+                                                header("Location: index.php");
                                                 
                                                     
                                                 }
@@ -66,7 +66,7 @@ $pagina = "add_categoria";
                                                     
                                                  else {
     
-                                                    echo "<input type='button' class='btn btn-success' value='BIENVENIDO {$_SESSION['user']}'/>";
+                                                    header("Location: index.php");
                                                     }
                                                 ?>                             
               

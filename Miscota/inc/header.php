@@ -45,8 +45,8 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li <?php if ($pagina == "inicio") {echo "class='active'";}?>><a href="index.php">Inicio</a></li>
-            <li <?php if ($pagina == "conocenos") {echo "class='active'";}?>><a href="conocenos.php">Conocenos</a></li>
-            <li <?php if ($pagina == "catalogo") {echo "class='active'";}?>><a href="catalogo.php">Catalogo</a></li>
+            <li <?php if ($pagina == "conocenos") {echo "class='active'";}?>><a href="conocenos.php">Conócenos</a></li>
+            <li <?php if ($pagina == "catalogo") {echo "class='active'";}?>><a href="catalogo.php">Catálogo</a></li>
             <li <?php if ($pagina == "contacto") {echo "class='active'";}?>><a href="contacto.php">Contacto</a></li>
           </ul>
           <form class="navbar-form navbar-right" role="form">

@@ -52,7 +52,7 @@ $pagina = "administrar_categorias";
                    <?php
                                                 if (!isset($_SESSION["user"])) {
     
-                                                echo "<a href='login.php'><input type='button' class='btn btn-success' value='INICIAR SESIÓN'/></a>";
+                                                header("Location: index.php");
                                                 
                                                     
                                                 }
@@ -66,7 +66,7 @@ $pagina = "administrar_categorias";
                                                     
                                                  else {
     
-                                                    echo "<input type='button' class='btn btn-success' value='BIENVENIDO {$_SESSION['user']}'/>";
+                                                    header("Location: index.php");
                                                     }
                                                 ?>                             
               
@@ -82,7 +82,7 @@ $pagina = "administrar_categorias";
     <div class="jumbotron">
       <div class="container">
         <h1>Administrar Categorías</h1>
-          <p align="right"><a class="btn btn-primary btn-lg" href="add_categoria.php" role="button">Añadir nuevo Categoría</a></p>
+          <p align="right"><a class="btn btn-primary btn-lg" href="add_categoria.php" role="button">Añadir nueva Categoría</a></p>
         <p>Añade, Edita y elimina las Categorías de los prodcutos de Miscota.</p>
 
 <?php

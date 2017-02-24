@@ -1,5 +1,3 @@
-
-
 <?php 
 $tituloPagina = "Login Usuarios" ;
 $pagina = "login";
@@ -41,11 +39,18 @@ include('inc/header.php'); ?>
                 $_SESSION["user"]=$_POST["user"];
                 $_SESSION["tipo"]=$obj->tipo;
                 $_SESSION["language"]="es";
-                header('Location: validar.php');
+              
+              if ($_SESSION['tipo']==2) {
+        
+         header('Location: catalogo_admin.php');
+        
+    } else {
+        
+        header('Location: index.php');
+    }
+              
               }
-          } else {
-            echo "Wrong Query";
-          }
+          } 
               
     }
           

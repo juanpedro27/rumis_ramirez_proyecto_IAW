@@ -9,6 +9,7 @@ include('inc/header.php'); ?>
         <hr>
         <p>Tu tienda de Mascotas especializada en productos para perros.</p>
         <img src="img/huellitas.png"  width="1150" height="330">
+          
       </div>
     </div>
 <?php include('inc/footer.php'); ?>

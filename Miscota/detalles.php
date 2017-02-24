@@ -27,7 +27,7 @@ include('inc/header.php'); ?>
                         echo "<h3><b>Categoría: </b>".$obj->nombre_cat."</h3>";
                         echo "<img src='".$obj->imagen."' WIDTH=300 HEIGHT=300 BORDER=2 >";
                         echo "<h3><b>Precio: </b>".$obj->precio. "€</h3>";
-                        echo "<p><a class='btn btn-default' href='detalle_pedido.php?id=$obj->id' role='button'>Añadir al carrito &raquo;</a></p>";
+                        echo "<p><a class='btn btn-default' href='detalle_pedido.php?id=$obj->id' role='button'>Comprar &raquo;</a></p>";
                     
                 }
                

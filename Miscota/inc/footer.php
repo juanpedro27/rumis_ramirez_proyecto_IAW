@@ -22,7 +22,6 @@
                 echo "<p>".$obj->descripcion."</p>";
                 echo "<img src='".$obj->imagen."' WIDTH=300 HEIGHT=300 BORDER=2 >";
                 echo "<a class='btn btn-default' href='detalles.php?id=$obj->id' role='button'>Ver detalles &raquo;</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp";
-                echo "<a class='btn btn-default' href='carrito.php?id=$obj->id' role='button'>Añadir al carrito &raquo;</a>";
                    
         echo "</div>";                
                      
