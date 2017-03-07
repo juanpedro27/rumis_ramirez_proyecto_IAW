@@ -165,7 +165,7 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `imagen`, `Cat
 (1, 'Collar Rojo', 'Kruuse Collar Reflectante Estrangulador Rojo 20x400.', 12, 'img/collar1.jpg', 3),
 (2, 'Collar Verde', 'Kruuse Collar Reflectante Estrangulador Verde 20x400.', 8, 'img/collar2.jpg', 3),
 (3, 'Collar Azul', 'Kruuse Collar Reflectante Estrangulador Azul 20x400.', 9, 'img/collar3.jpg', 3),
-(4, 'Collar Amarillo', 'Kruuse Collar Reflectante Estrangulador Amarillo 20x400-550 mm.', 11, 'img/collar4.jpg', 3),
+(4, 'Collar Amarillo', 'Kruuse Collar Reflectante Estrangulador Amarillo 20x400.', 11, 'img/collar4.jpg', 3),
 (5, 'Pienso Royal Canin', 'Royal Canin Digestive Care para perros adultos 5 Kg.', 35, 'img/pienso1.jpg', 1),
 (6, 'Pienso Bon Menu', 'BON MENÚ alimento para perros receta tradicional bolsa 4 kg.', 75, 'img/pienso2.jpg', 1),
 (7, 'Pienso Affinity', 'Affinity Ultima Adult pienso para perros con pollo.', 85, 'img/pienso3.jpg', 1),
