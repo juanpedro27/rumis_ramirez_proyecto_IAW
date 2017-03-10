@@ -6,22 +6,26 @@ include('inc/header2.php');
 
 <div id="navbar" class="collapse navbar-collapse">
     <form class="navbar-form navbar-right" role="form">
+        
         <?php
-        if (!isset($_SESSION["user"])) {
+        
+        // TRATAMIENTO DE LA SESIÓN
+        
+        if (!isset($_SESSION["user"])) { // SI NO HAY UNA SESIÓN INICIADA REDIRIGE A INDEX
 
             header("Location: index.php");
 
 
         }
 
-        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
+        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) { //SI LA SESIÓN ES LA DE ADMIN CAMBIA EL BOTÓN Y LO ENLAZA HACIA CATALOGO ADMINISTRADOR
 
             echo "<a href='catalogo_admin.php'><input type='button' class='btn btn-success' value='BIENVENIDO ADMIN'/></a>";
 
 
         }           
 
-        else {
+        else { // SI LA SESIÓN ES LA DE UN USUARIO NORMAL TIPO1 REDIRIGE A INDEX
 
             header("Location: index.php");
         }
@@ -35,13 +39,6 @@ include('inc/header2.php');
 </div>
 </nav>
 
-
-
-
-
-
-
-
 <div class="jumbotron">
     <div class="container">
         <h1>Bienvenido como Administrador</h1>
@@ -53,13 +50,13 @@ include('inc/header2.php');
             <?php
 
             include('conexionbd.php');
+            
+            // SELECCIONAMOS TANTO LA TABLA CATEGORIAS COMO LA DE PRODUCTOS
 
             if ($result = $connection->query("select * from categorias join productos on categorias.id=productos.categorias_id;")); {
 
-
-
-
-
+                // RECORREMOS MEDIANTE UN BUCLE AMBAS TABLAS PARA MOSTRAR LOS DATOS REQUERIDOS
+                
                 while($obj = $result->fetch_object()) { 
 
                     echo "<div class='col-md-4'>"; 

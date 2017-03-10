@@ -15,9 +15,12 @@ include('inc/header.php'); ?>
             <?php
 
             include('conexionbd.php');
+            
+            // SELECCIONAMOS TANTO LA TABLA CATEGORIAS COMO LA DE PRODUCTOS
 
             if ($result = $connection->query("select * from categorias join productos on categorias.id=productos.categorias_id;")); {
-
+                
+                // RECORREMOS MEDIANTE UN BUCLE AMBAS TABLAS PARA MOSTRAR LOS DATOS REQUERIDOS
 
                 while($obj = $result->fetch_object()) { 
 

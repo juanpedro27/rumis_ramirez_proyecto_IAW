@@ -10,19 +10,19 @@ include('inc/header2.php');
 
         <?php
 
-        if (!isset($_SESSION["user"])) {
+        if (!isset($_SESSION["user"])) { // SI NO HAY UNA SESIÓN INICIADA REDIRIGE A INDEX
 
             header("Location: index.php");                                              
 
         }
 
-        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
+        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) { //SI LA SESIÓN ES LA DE ADMIN CAMBIA EL BOTÓN Y LO ENLAZA HACIA ADMINISTRAR PEDIDOS
 
             echo "<a href='administrar_pedidos.php'><input type='button' class='btn btn-success' value='VOLVER A ADMINISTRAR PEDIDOS'/></a>";
 
         }           
 
-        else {
+        else { // SI LA SESIÓN ES LA DE UN USUARIO NORMAL TIPO1 REDIRIGE A INDEX
 
             header("Location: index.php");
 
@@ -49,6 +49,8 @@ include('inc/header2.php');
         <p>Rellene el siguiente formulario para añadir un pedido nuevo.</p>
 
         <?php  
+        
+        // INTRODUCCIÓN DE LOS DATOS MEDIANTE FORMULARIO
 
         if (!isset($_POST["id"])) : ?>
 
@@ -82,6 +84,21 @@ include('inc/header2.php');
                     <label for="Clientes_id">Id de Cliente</label>
                     <input type="number" class="form-control" name="Clientes_id" placeholder="Introduce ID de cliente" required>
                 </div>
+                
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" class="form-control" name="cantidad" placeholder="Introduce la Cantidad" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="precio">Precio</label>
+                    <input type="number" class="form-control" name="precio" placeholder="Introduce el precio" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Productos_id">Id de Producto</label>
+                    <input type="number" class="form-control" name="Productos_id" placeholder="Introduce el Id del Producto" required>
+                </div>
 
                 <span><input type="submit" value="AÑADIR"></span>
 
@@ -98,22 +115,28 @@ include('inc/header2.php');
         <?php else: ?>        
 
         <?php
+        
+        // INSERCCIÓN DE LOS DATOS PROCEDENTES DEL FORMULARIO POR METODO POST
 
         include('conexionbd.php');            
 
         $id=$_POST['id'];
 
         $consulta= "INSERT INTO pedidos VALUES('$id','".$_POST['fecha']."','".$_POST['total']."','".$_POST['comentario']."','".$_POST['Clientes_id']."')";
+        
+        $consulta1= "INSERT INTO detalle_pedidos VALUES('$id','".$_POST['cantidad']."','".$_POST['precio']."','$id','".$_POST['Productos_id']."')";
 
         $result = $connection->query($consulta);
+        
+        $result1 = $connection->query($consulta1);
 
-        if (!$result) {
+        if ($result and $result1) {
 
-            echo "Query Error";
+            echo "El pedido ha sido añadido correctamente";
 
         } else {
 
-            echo "Tu pedido ha sido añadido correctamente";
+            echo "Query Error";
 
         }
 

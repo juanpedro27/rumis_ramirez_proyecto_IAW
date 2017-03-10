@@ -6,22 +6,26 @@ include('inc/header2.php');
 
 <div id="navbar" class="collapse navbar-collapse">
     <form class="navbar-form navbar-right" role="form">
+        
         <?php
-        if (!isset($_SESSION["user"])) {
+        
+        // TRATAMIENTO DE LA SESIÓN
+        
+        if (!isset($_SESSION["user"])) { // SI NO HAY UNA SESIÓN INICIADA REDIRIGE A INDEX
 
             header("Location: index.php");
 
 
         }
 
-        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
+        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) { //SI LA SESIÓN ES LA DE ADMIN CAMBIA EL BOTÓN Y LO ENLAZA HACIA ADMINISTRAR CATEGORIA
 
             echo "<a href='administrar_categorias.php'><input type='button' class='btn btn-success' value='VOLVER A ADMINISTRAR LAS CATEGORIAS'/></a>";
 
 
         }           
 
-        else {
+        else { // SI LA SESIÓN ES LA DE UN USUARIO NORMAL TIPO1 REDIRIGE A INDEX
 
             header("Location: index.php");
         }
@@ -43,16 +47,19 @@ include('inc/header2.php');
 
         <?php
 
-
-
         include('conexionbd.php');
-
+        
+        // SELECCION DE LA TABLA CATEGORIA MEDIANTE SU ID
 
         if ($result = $connection->query("select * from categorias where id= ".$_GET['id'])); { 
 
             $catid=$_GET['id'];
+            
+            // RECORREMOS LA TABLA PARA SACAR LOS DATOS
 
             $obj = $result->fetch_object();
+            
+            // FABRICAMOS EL FORMULARIO DE EDICION
 
             echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
 
@@ -84,6 +91,8 @@ include('inc/header2.php');
             $id=$_POST['id'];
             $nombre_cat=$_POST['nombre_cat'];
             $descripcion=$_POST['descripcion'];
+            
+            // CONSULTA PARA INTRODUCIR LOS NUEVOS DATOS
 
             //consulta
             $consulta="UPDATE categorias SET

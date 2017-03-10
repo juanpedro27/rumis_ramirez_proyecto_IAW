@@ -9,19 +9,19 @@ include('inc/header2.php');
     <form class="navbar-form navbar-right" role="form">
 
         <?php
-        if (!isset($_SESSION["user"])) {
+        if (!isset($_SESSION["user"])) { // SI NO HAY UNA SESIÓN INICIADA REDIRIGE A INDEX
 
             header("Location: index.php");
 
         }
 
-        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
+        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) { //SI LA SESIÓN ES LA DE ADMIN CAMBIA EL BOTÓN Y LO ENLAZA HACIA ADMINISTRAR DETALLE DE PEDIDOS
 
             echo "<a href='administrar_detallepedidos.php'><input type='button' class='btn btn-success' value='VOLVER A ADMINISTRAR DETALLES DE PEDIDO'/></a>";
 
         }           
 
-        else {
+        else { // SI LA SESIÓN ES LA DE UN USUARIO NORMAL TIPO1 REDIRIGE A INDEX
 
             header("Location: index.php");
 
@@ -48,6 +48,8 @@ include('inc/header2.php');
         <p>Rellene el siguiente formulario para añadir un nuevo detalle de pedido.</p>
 
         <?php  
+        
+         // INTRODUCCIÓN DE LOS DATOS MEDIANTE FORMULARIO
 
         if (!isset($_POST["id"])) : ?>
 
@@ -56,10 +58,10 @@ include('inc/header2.php');
             <form role="form" method="post" enctype="multipart/form-data">
 
                 <legend>Rellene el siguiente formulario:</legend>
-
-                <div class="form-group">               
-                    <label for="id">ID</label>               
-                    <input type="number" class="form-control" name="id" placeholder="Introduce ID" required>
+                
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="number" class="form-control" name="id" placeholder="Introduce id" required>
                 </div>
 
                 <div class="form-group">
@@ -97,6 +99,8 @@ include('inc/header2.php');
         <?php else: ?>
 
         <?php
+        
+        // INSERCCIÓN DE LOS DATOS PROCEDENTES DEL FORMULARIO POR METODO POST
 
         include('conexionbd.php');          
 

@@ -6,22 +6,26 @@ include('inc/header2.php');
 
 <div id="navbar" class="collapse navbar-collapse">
     <form class="navbar-form navbar-right" role="form">
+        
         <?php
-        if (!isset($_SESSION["user"])) {
+        
+        // TRATAMIENTO DE LA SESIÓN
+        
+        if (!isset($_SESSION["user"])) { // SI NO HAY UNA SESIÓN INICIADA REDIRIGE A INDEX
 
             header("Location: index.php");
 
 
         }
 
-        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
+        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) { //SI LA SESIÓN ES LA DE ADMIN CAMBIA EL BOTÓN Y LO ENLAZA HACIA ADMINISTRAR CLIENTES
 
             echo "<a href='administrar_clientes.php'><input type='button' class='btn btn-success' value='VUELVE A ADMINISTRAR CLIENTES'/></a>";
 
 
         }           
 
-        else {
+        else { // SI LA SESIÓN ES LA DE UN USUARIO NORMAL TIPO1 REDIRIGE A INDEX
 
             header("Location: index.php");
         }

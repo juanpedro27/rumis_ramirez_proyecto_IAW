@@ -10,19 +10,21 @@ include('inc/header2.php');
         
         <?php
         
-        if (!isset($_SESSION["user"])) {
+        // TRATAMIENTO DE LA SESIÓN
+        
+        if (!isset($_SESSION["user"])) { // SI NO HAY UNA SESIÓN INICIADA REDIRIGE A INDEX
 
             header("Location: index.php");
 
         }
 
-        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
+        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) { //SI LA SESIÓN ES LA DE ADMIN CAMBIA EL BOTÓN Y LO ENLAZA HACIA ADMINISTRAR CATEGORIA
 
             echo "<a href='administrar_categorias.php'><input type='button' class='btn btn-success' value='VOLVER A ADMINISTRAR CATEGORIAS'/></a>";
 
         }           
 
-        else {
+        else { // SI LA SESIÓN ES LA DE UN USUARIO NORMAL TIPO1 REDIRIGE A INDEX
 
             header("Location: index.php");
         }
@@ -48,6 +50,8 @@ include('inc/header2.php');
         <p>Rellene el siguiente formulario para añadir una nueva Categoría.</p>
 
         <?php  
+        
+        // INTRODUCCIÓN DE LOS DATOS MEDIANTE FORMULARIO
 
         if (!isset($_POST["id"])) : ?>
         <center><form role="form" method="post" enctype="multipart/form-data">
@@ -74,6 +78,8 @@ include('inc/header2.php');
         <?php else: ?>
 
         <?php
+        
+        // INSERCCIÓN DE LOS DATOS PROCEDENTES DEL FORMULARIO POR METODO POST
 
         include('conexionbd.php');            
 

@@ -13,34 +13,34 @@ include('inc/header.php'); ?>
         <?php
 
         //FORM SUBMITTED
+        
         if (isset($_POST["user"])) {
             //CREATING THE CONNECTION
             include('conexionbd.php');
 
-            //MAKING A SELECT QUERY
-            //Password coded with md5 at the database. Look for better options
+            //CONSULTA PARA SELECCIONAR LOS CLIENTES CON SU CONTRASEÑA
+            //Contraseña codificada con md5 en la base de datos.
+            
             $consulta="select * from clientes where
           usuario='".$_POST["user"]."' and password=md5('".$_POST["password"]."');";
-            //Test if the query was correct
-            //SQL Injection Possible
-            //Check http://php.net/manual/es/mysqli.prepare.php for more security
+            
             if ($result = $connection->query($consulta)) {
                 //No rows returned
-                if ($result->num_rows===0) {
+                if ($result->num_rows===0) { // SI LA CONSULTA NO ARROJA RESULTADOS VEREMOS LOGIN INVALIDO
                     echo "LOGIN INVALIDO";
 
-                } else {
+                } else { // SI LA CONSULTA ES CORRECTARECORREMOS LA TABLA CLIENTE Y METEMOS EN VARIABLES DE SISION LOS CAMPOS REQUERIDOS
                     $obj=$result->fetch_object();
                     //VALID LOGIN. SETTING SESSION VARS
                     $_SESSION["user"]=$_POST["user"];
                     $_SESSION["tipo"]=$obj->tipo;
                     $_SESSION["language"]="es";
 
-                    if ($_SESSION['tipo']==2) {
+                    if ($_SESSION['tipo']==2) { // SI LA SESION ES TIPO 2 'ADMIN' NOS REDIRIGE A CATALOGO ADMINISTRADOR
 
                         header('Location: catalogo_admin.php');
 
-                    } else {
+                    } else { // // SI LA SESION ES TIPO 1 'USUARIOS NORMALES' NOS LLEVARA A INDEX
 
                         header('Location: index.php');
                     }
@@ -50,9 +50,8 @@ include('inc/header.php'); ?>
 
         }
 
-
+            // CREACION DEL FORMULARIO DE LOGIN, COMPARA LOS DATOS INTRODUCIDOS CON LOS EXISTENTES EN LA TABLA CLIENTE SI COINCIDEN ACCEDEREMOS
         ?>
-
 
         <form action="login.php" method="post">
             <div class="form-group">
@@ -64,8 +63,6 @@ include('inc/header.php'); ?>
             <p><input type="submit" value="ACCEDE"> <input type="reset" value="LIMPIAR"></p>
 
         </form>
-
-
 
         <p><a class="btn btn-primary btn-lg" href="formu_registro.php" role="button">Pincha aquí si aún no estas registrado</a></p>
         <img src="img/cuenco.jpg" width="80" height="80" align="right">

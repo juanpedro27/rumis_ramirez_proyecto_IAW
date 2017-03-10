@@ -6,22 +6,26 @@ include('inc/header2.php');
 
 <div id="navbar" class="collapse navbar-collapse">
     <form class="navbar-form navbar-right" role="form">
+        
         <?php
-        if (!isset($_SESSION["user"])) {
+        
+        // TRATAMIENTO DE LA SESIÓN
+        
+        if (!isset($_SESSION["user"])) { // SI NO HAY UNA SESIÓN INICIADA REDIRIGE A INDEX
 
             header("Location: index.php");
 
 
         }
 
-        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
+        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) { //SI LA SESIÓN ES LA DE ADMIN CAMBIA EL BOTÓN Y LO ENLAZA HACIA CATALOGO DE ADMINISTRADOR
 
             echo "<a href='catalogo_admin.php'><input type='button' class='btn btn-success' value='VUELVE AL PANEL DE CONTROL'/></a>";
 
 
         }           
 
-        else {
+        else { // SI LA SESIÓN ES LA DE UN USUARIO NORMAL TIPO1 REDIRIGE A INDEX
 
             header("Location: index.php");
         }
@@ -39,13 +43,16 @@ include('inc/header2.php');
 
 include('conexionbd.php');
 
-//Hace que el array se convierta en el ID del producto.
+// HACE QUE EL ARRAY SE CONVIERTA EN EL ID de PRODUCTO.
+
 foreach ($_GET as $key => $id)
+    
+    // SELECCIONAMOS EL PRODUCTO POR SU ID
 
     if ($result1 = $connection->query("select * from categorias join productos on categorias.id=productos.categorias_id where productos.id=$id;")) {
 
-
-        //Por ultimo la reparacion
+        // BORRADO DEL PRODUCTO
+        
         if ($result6 = $connection->query("DELETE FROM productos where id=$id;")) {  
 
             echo "<center><h3>El producto $id ha sido borrado.</h3></center>";

@@ -6,9 +6,12 @@
         <?php
 
         include('conexionbd.php');
+        
+        // CONSULTA PARA SELCCIONAR LA TABLA CATEGORIA Y PRODUCTOS
 
         if ($result = $connection->query("select * from categorias join productos on categorias.id=productos.categorias_id where productos.id=1 or productos.id=5 or productos.id=9 ;")); {
 
+            // RECORREMOS MEDIANTE UN BUCLE AMBAS TABLAS PARA MOSTRAR LOS DATOS REQUERIDOS
 
             while($obj = $result->fetch_object()) { 
 

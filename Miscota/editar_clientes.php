@@ -6,22 +6,26 @@ include('inc/header2.php');
 
 <div id="navbar" class="collapse navbar-collapse">
     <form class="navbar-form navbar-right" role="form">
+        
         <?php
+        
+        // TRATAMIENTO DE LA SESIÓN
+        
         if (!isset($_SESSION["user"])) {
 
-            header("Location: index.php");
+            header("Location: index.php"); // SI NO HAY UNA SESIÓN INICIADA REDIRIGE A INDEX
 
 
         }
 
-        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
+        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) { //SI LA SESIÓN ES LA DE ADMIN CAMBIA EL BOTÓN Y LO ENLAZA HACIA ADMINISTRAR CLIENTES
 
             echo "<a href='administrar_clientes.php'><input type='button' class='btn btn-success' value='VOLVER A ADMINISTRAR LOS CLIENTES'/></a>";
 
 
         }           
 
-        else {
+        else { // SI LA SESIÓN ES LA DE UN USUARIO NORMAL TIPO1 REDIRIGE A INDEX
 
             header("Location: index.php");
         }
@@ -43,16 +47,19 @@ include('inc/header2.php');
 
         <?php
 
-
-
         include('conexionbd.php');
-
+        
+        // SELECCION DE LA TABLA CLIENTES MEDIANTE SU ID
 
         if ($result = $connection->query("select * from clientes where id= ".$_GET['id'])); { 
 
             $id_cliente=$_GET['id'];  
+            
+            // RECORREMOS LA TABLA PARA SACAR LOS DATOS
 
             $obj = $result->fetch_object();
+            
+            // FABRICAMOS EL FORMULARIO DE EDICION
 
             echo "<center><form role='form' method='post' enctype='multipart/form-data'>";
 
@@ -109,6 +116,8 @@ include('inc/header2.php');
             $usuario=$_POST['usuario'];
             $password=$_POST['password'];
             $tipo=$_POST['tipo'];
+            
+            // CONSULTA PARA INTRODUCIR LOS NUEVOS DATOS
 
             //consulta
             $consulta="UPDATE  clientes SET

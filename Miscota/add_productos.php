@@ -10,19 +10,19 @@ include('inc/header2.php');
 
         <?php
 
-        if (!isset($_SESSION["user"])) {
+        if (!isset($_SESSION["user"])) { // SI NO HAY UNA SESIÓN INICIADA REDIRIGE A INDEX
 
             header("Location: index.php");                                                
 
         }
 
-        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) {
+        elseif (isset($_SESSION['user']) && $_SESSION['tipo']==2) { //SI LA SESIÓN ES LA DE ADMIN CAMBIA EL BOTÓN Y LO ENLAZA HACIA CATALOGO DE ADMINISTRADOR
 
             echo "<a href='catalogo_admin.php'><input type='button' class='btn btn-success' value='PANEL DE CONTROL'/></a>";
 
         }           
 
-        else {
+        else { // SI LA SESIÓN ES LA DE UN USUARIO NORMAL TIPO1 REDIRIGE A INDEX
 
             header("Location: index.php");
 
@@ -49,6 +49,8 @@ include('inc/header2.php');
         <p>Aqui puedes añadir un nuevo producto.</p>
 
         <?php  
+        
+        // INTRODUCCIÓN DE LOS DATOS MEDIANTE FORMULARIO
 
         if (!isset($_POST["nombre"])) : ?>
 
@@ -96,7 +98,9 @@ include('inc/header2.php');
 
         </center>
 
-        <?php else:      
+        <?php else:    
+        
+        // TRATAMIENTO DE LA IMAGEN
 
         //Temp file. Where the uploaded file is stored temporary
         $tmp_file = $_FILES['imagen']['tmp_name'];
@@ -144,7 +148,9 @@ include('inc/header2.php');
             $precio       = $_POST['precio'];
             $cate       = $_POST['categorias_id'];
 
-            include('conexionbd.php');            
+            include('conexionbd.php');  
+            
+            // INSERCCIÓN DE LOS DATOS PROCEDENTES DEL FORMULARIO POR METODO POST
 
             $query = "INSERT INTO productos VALUES(null, '$nombre', '$descripcion', '$precio', '$target_file', $cate);";
 

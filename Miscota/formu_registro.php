@@ -10,6 +10,8 @@ include('inc/header.php'); ?>
 
 
         <?php  
+        
+        // CREACION DEL FORMULARIO UTILIZANDO METODO POST
 
         if (!isset($_POST["nombre"])) : ?>
         <form role="form" method="post" enctype="multipart/form-data">
@@ -56,6 +58,8 @@ include('inc/header.php'); ?>
         <?php
 
         include('conexionbd.php');
+        
+        // INSERCCION DE LOS DATOS OBTENIDOS MEDIANTE EL FORMULARIO
 
         $nombre=$_POST['nombre'];
         $consulta= "INSERT INTO clientes VALUES('null','$nombre','".$_POST['apellidos']."','".$_POST['direccion']."','".$_POST['correo']."','".$_POST['usuario']."',md5('".$_POST['password']."'),1)";
